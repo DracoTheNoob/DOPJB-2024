@@ -1,0 +1,32 @@
+{
+"0": {
+"role": "G",
+"level": 3,
+"weapon": "0130",
+"item": "0110"
+},
+"1": {
+"role": "G",
+"level": 3,
+"weapon": "0130",
+"item": "0120"
+},
+"2": {
+"role": "G",
+"level": 3,
+"weapon": "0130",
+"item": "0110"
+},
+"3": {
+"role": "D",
+"level": 3,
+"weapon": "0430",
+"item": "0420"
+},
+"4": {
+"role": "D",
+"level": 3,
+"weapon": "0430",
+"item": "0410"
+}
+}

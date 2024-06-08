@@ -34,6 +34,11 @@ for i in range(players_amount):
     player = {}
 
     name = ask_str(f'Nom du joueur n°{i} : ')
+
+    while name in list(json.keys()):
+        print('Ce nom a déjà été entré, veuillez en choisir un autre\n')
+        name = ask_str(f'Nom du joueur n°{i} : ')
+
     player['role'] = ask_specific(f'Role du joueur n°{i} (G=guerrier, V=voleur, M=mage, D=druide) : ', possibilities=['G', 'V', 'M', 'D'])
     player['level'] = ask_integer(f'Niveau du joueur n°{i} (0-5) : ', bounds=(0, 5))
     player['weapon'] = input(f'Identifiant de l\'arme du joueur n°{i} : ')

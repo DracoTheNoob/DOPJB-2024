@@ -264,7 +264,7 @@ def draw_attack(screen, xf: int, yf: int, xt: int, yt: int, remaining: int, atta
     :param attack: The value of the damages
     :return: None
     """
-    color = (180, 180, 180) if not attack.hit else ((255, 240, 80) if attack.critical is True else (240, 60, 240))
+    color = (180, 180, 180) if not attack.hit else ((255, 240, 80) if attack.critical is True else (240, 40, 40))
     text = str(attack.damage)
 
     draw_path(screen, xf, yf, xt, yt, remaining, text, color)
@@ -286,4 +286,4 @@ def draw_heal(screen, xf: int, yf: int, xt: float, yt: int, remaining: int, heal
     if heal == 0:
         return
 
-    draw_path(screen, xf, yf, int(xt), yt, remaining, f'+{heal}', (40, 240, 40) if heal > 0 else (240, 40, 40))
+    draw_path(screen, xf, yf, int(xt), yt, remaining, f'{'+' if heal > 0 else '-'}{heal}', (40, 240, 40) if heal > 0 else (240, 60, 240))

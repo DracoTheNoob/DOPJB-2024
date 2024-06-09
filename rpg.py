@@ -160,7 +160,7 @@ class Entity:
         hit = random.randint(1, 100) > self.dodge
         damage = int(round(attack.damage * (1 - self.defense/100))) if hit else 0
 
-        if hit and self.weapon is None and self.item is None:
+        if self.name in ['P1', 'P2', 'P3', 'L1', 'L2', 'L3', 'MV1', 'MV2', 'MV3', 'D1']:
             self.hp -= damage
 
         return Attack(hit, damage, attack.critical)

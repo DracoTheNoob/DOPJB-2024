@@ -158,7 +158,7 @@ def draw_square(screen, x: int, y: int, side: int, color: tuple[int, int, int], 
     draw_rect(screen, x, y, side, side, color, fill=fill)
 
 
-def draw_image(screen, image: str, x: int, y: int, side: int, tick: int) -> None:
+def draw_image(screen, image: str, x: int, y: int, side: int, tick: int, breathing: bool = False) -> None:
     """
     To draw an image on a given surface
     :param screen: The given surface
@@ -167,6 +167,7 @@ def draw_image(screen, image: str, x: int, y: int, side: int, tick: int) -> None
     :param y: The y location of the drawn image
     :param side: The length of the side of the image
     :param tick: The current tick of the game
+    :param breathing: If the image should be animated (breathing) or not
     :return: None
     """
 
@@ -176,7 +177,10 @@ def draw_image(screen, image: str, x: int, y: int, side: int, tick: int) -> None
         images_cache[image] = img
         animations_cache[image] = random.randint(0, 60)
 
-    tick = math.sin((animations_cache[image] + tick)*math.pi/35)*.05 + 1
+    if breathing:
+        tick = math.sin((animations_cache[image] + .5*tick)*math.pi/35)*.05 + 1
+    else:
+        tick = 1
     img = images_cache[image].copy()
     img = pygame.transform.scale(img, (side, side*tick))
     screen.blit(img, (x, y - img.get_height()*(tick-1)/2))
@@ -205,7 +209,7 @@ def draw_entity(screen, loc: tuple[int | float, int | float], hp: int, ratio: fl
     if name not in list(last_ratios.keys()):
         last_ratios[name] = 1
 
-    draw_image(screen, image, x - w * .3, y + (w//1.6 if player else int(w*1.5)), w * 2 if boss else w*1.3, remaining)
+    draw_image(screen, image, x - w * .3, y + (w//1.6 if player else int(w*1.5)), w * 2 if boss else w*1.3, tick, breathing=ratio>0)
 
     if ratio > 0:
         draw_health_bar(screen, x + 5, y + w + 35, w - 10, hp, ratio, last_ratios[name], remaining, boss=boss)
@@ -286,4 +290,4 @@ def draw_heal(screen, xf: int, yf: int, xt: float, yt: int, remaining: int, heal
     if heal == 0:
         return
 
-    draw_path(screen, xf, yf, int(xt), yt, remaining, f'{'+' if heal > 0 else '-'}{heal}', (40, 240, 40) if heal > 0 else (240, 60, 240))
+    draw_path(screen, xf, yf, int(xt), yt, remaining, f'{"+" if heal > 0 else ""}{heal}', (240, 40, 240) if heal > 0 else (140, 80, 120))

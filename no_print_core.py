@@ -127,8 +127,6 @@ class Fight:
                     target = self.get_player_by_name(self.enemy.targets[i])
 
                     if attack.hit:
-                        attack = self.attacks[i]
-
                         if attack.hit:
                             target.hp -= attack.damage
 
@@ -162,11 +160,6 @@ class Fight:
             case 'heal':
                 for i in range(len(self.players)):
                     self.players[i].hp = min(self.players[i].hp + self.heals[i], self.players[i].max_hp)
-
-                for player in self.players:
-                    if player.hp <= 0:
-                        self.players.remove(player)
-                        self.dead_players.append(player)
 
                 self.enemy.hp = min(self.enemy.hp + self.heals[-1], self.enemy.max_hp)
                 self.heals = [0]*6

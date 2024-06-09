@@ -187,8 +187,6 @@ def main():
 
         attack_remaining = max(attack_remaining - 1, 0)
 
-        animation_tick = 0
-
         if escape_pressed:
             break
 
